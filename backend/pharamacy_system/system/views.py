@@ -2,9 +2,9 @@ from rest_framework.views import APIView
 from django.http import HttpResponse
 import json
 import matplotlib.pyplot as plt
-from PIL import Image
 from rest_framework.decorators import action
 import io
+
 
 class TestAPIView(APIView):
 
