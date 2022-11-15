@@ -4,22 +4,21 @@ import json
 import matplotlib.pyplot as plt
 from PIL import Image
 from rest_framework.decorators import action
+import io
 
 class TestAPIView(APIView):
 
     @staticmethod
     def get(request):
-        plt.plot([1, 2, 3, 4])
+        plt.plot([1, 2, 3, 4], color="pink")
         plt.ylabel('some numbers')
-        plt.savefig("output.jpg")
-        try:
-            with open("output.jpg", "rb") as f:
-                return HttpResponse(f.read(), content_type="image/jpeg")
-        except IOError:
-            red = Image.new('RGBA', (1, 1), (255, 0, 0, 0))
-            response = HttpResponse(content_type="image/jpeg")
-            red.save(response, "JPEG")
-            return response
+
+        # Save it to a temporary buffer.
+        buf = io.BytesIO()
+        plt.savefig(buf, format='png')
+        buf.seek(0)
+
+        return HttpResponse(buf, content_type="image/png")
 
 
 class LogView(APIView):
