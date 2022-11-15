@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="../css/panel.css">
+        <title>TwojaApteka</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+
+        <header>
+            <h1>TwojaApteka: Panel Pracownika</h1>
+        </header>
+
+
+        <nav>
+            <ul>
+                <a href="panel_glowny.html">Strona główna</a> 
+                <br>
+                <hr>
+                <a href="dostepne_leki.html">Dostępne leki</a> 
+                <br>
+                <hr>
+                <a href="zamiennik.html">Znajdź lek lub zamiennik</a>
+                <br> 
+                <hr>                   
+                <a href="sprzedaz.html">Dokonaj sprzedaży</a>
+                <br>
+                <hr>
+                <a href="hurtownia.html">Zamów z hurtowni</a>
+                <br>
+                <hr>
+                <a href="#">Generuj raport</a>
+                <br>
+                <hr>
+                <a href="edycja.html">Zarządzaj kontem</a>
+                <br>
+                <hr>
+                <a href="#">Wyloguj</a>
+            </ul>
+        </nav>
+
+        <article>
+            <h2>Dostępne leki</h2>
+
+            <form action="#" method="get">
+                <input type="text" name="q">
+                <input type="hidden" name="ie" value="utf-8">
+                <input type="radio" name="lr" value="" id="lr0" checked> <label for="lr0">Sortuj według miejsca</label>
+                <input type="radio" name="lr" value="lang_pl" id="lr1"> <label for="lr1">Sortuj według liczby sztuk</label>
+                <input type="submit" value="Szukaj">
+            </form>
+            <br>
+            <br>
+            <table>
+                <tr><th>Nazwa</th><th>Liczba sztuk</th><th>Recepta</th><th>Cena</th><th>Miejsce położenia</th></tr>
+                <tr><td>String</td><td>Int</td><td>Boolean</td><td>Double</td><td>String</td></tr>
+                <tr><td>String</td><td>Int</td><td>Boolean</td><td>Double</td><td>String</td></tr>
+            </table>
+        </article>
+
+    </body>
+</html>
