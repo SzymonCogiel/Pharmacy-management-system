@@ -1,10 +1,12 @@
 from rest_framework.views import APIView
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import json
 import matplotlib.pyplot as plt
 from rest_framework.decorators import action
 import io
-
+import pandas as pd
+from .models import User
+from .serializers import UserSerializer
 
 class TestAPIView(APIView):
 
@@ -26,12 +28,11 @@ class LogView(APIView):
     @action(detail=False, methods=['get'])
     def get(self, request):
 
-        # mockup until we have the database
-        mock_users = {'szymon': 'password'}
         login = request.GET.get('login', None)
         password = request.GET.get('password', None)
-
-        if mock_users[login] == password:
+        user = User.objects.filter(user_name=login).values()
+        expected_pass = user[0]['password']
+        if expected_pass == password:
             response = str(json.dumps(str("ok")))
         else:
             response = str(json.dumps(str("denial")))
@@ -46,9 +47,9 @@ class RegisterView(APIView):
         mail = request.GET.get('mail', None)
         login = request.GET.get('login', None)
         password = request.GET.get('password', None)
-        print(password)
-        response = str(json.dumps(str(login)))
-        return HttpResponse(response, content_type="text/plain")
+        user = User(user_name=login, mail=mail, password=password)
+        user.save()
+        return HttpResponse(login, content_type="text/plain")
 
 
 class MapView(APIView):
@@ -75,6 +76,9 @@ class DataDrugsView(APIView):
     pass
 
 
+class DataTestView(APIView):
 
-
-
+    @action(detail=False, methods=['get'])
+    def get(self, request):
+        result = pd.DataFrame({'bla': [1, 2, 3], 'bla2': ['a', 'b', 'c']}).to_json(orient='index')
+        return JsonResponse(json.loads(result), safe=False)
