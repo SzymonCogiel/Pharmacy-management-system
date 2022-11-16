@@ -7,6 +7,9 @@ import io
 import pandas as pd
 from .models import User
 from .serializers import UserSerializer
+from django.forms import ValidationError
+from django.core.exceptions import ObjectDoesNotExist
+
 
 class TestAPIView(APIView):
 
@@ -47,9 +50,29 @@ class RegisterView(APIView):
         mail = request.GET.get('mail', None)
         login = request.GET.get('login', None)
         password = request.GET.get('password', None)
+        exsist = self.check_user(login, mail)
+        if exsist['login']:
+            return HttpResponse('Istnieje juz konto o takim logine', content_type="text/plain")
+        elif exsist['mail']:
+            return HttpResponse('Istnieje juz konto o takim mailu', content_type="text/plain")
         user = User(user_name=login, mail=mail, password=password)
         user.save()
-        return HttpResponse(login, content_type="text/plain")
+        return HttpResponse('Pomyslnie zjerestorwany', status=201, content_type="text/plain")
+
+    def check_user(self, login, mail) -> dict[bool]:
+
+        exsist = {'login': True, 'mail': True}
+
+        try:
+            User.objects.get(user_name=login)
+        except ObjectDoesNotExist:
+            exsist['login'] = False
+        try:
+            User.objects.get(mail=mail)
+        except ObjectDoesNotExist:
+            exsist['mail'] = False
+        finally:
+            return exsist
 
 
 class MapView(APIView):
