@@ -3,7 +3,7 @@
 <html>
 
     <head>
-        <link rel="stylesheet" type="text/css" href="panel.css">
+        <link rel="stylesheet" type="text/css" href="../css/panel.css">
         <title>TwojaApteka</title>
         <meta charset="utf-8">
     </head>
@@ -43,8 +43,17 @@
         </nav>
 
         <article>
-            <a href="recepta.html">Zrealizuj recepte</a>
-            <a href="bez_recepty.html">Zakupy bez recepty</a>
+            <form action="#">
+                <label for="fname">Nowe hasło:</label>
+                <input type="text" id="fname" name="fname"><br><br>
+                <label for="lname">Powtórz nowe hasło:</label>
+                <input type="text" id="lname" name="lname"><br><br>
+                <label for="lname">Potwierdź starym hasłem:</label>
+                <input type="text" id="lname" name="lname"><br><br>
+                <button type="button" onclick="alert('Twoje hasło zostało zmienione')">Zmień</button>
+            </form>
+
+
         </article>
 
     </body>

@@ -3,7 +3,7 @@
 <html>
 
     <head>
-        <link rel="stylesheet" type="text/css" href="panel.css">
+        <link rel="stylesheet" type="text/css" href="../css/panel.css">
         <title>TwojaApteka</title>
         <meta charset="utf-8">
     </head>
@@ -43,7 +43,27 @@
         </nav>
 
         <article>
-            <a href="zmiana_hasla.html">Zmień swoje hasło</a>
+            <h2>Zamówienia</h2>
+
+            <form action="#" method="get">
+                <input type="text" name="q">
+                <input type="hidden" name="ie" value="utf-8">
+                <input type="radio" name="lr" value="" id="lr0" checked> <label for="lr0">Szukaj po nazwie</label>
+                <input type="radio" name="lr" value="lang_pl" id="lr1"> <label for="lr1">Szukaj po hurtowni</label>
+                <input type="submit" value="Szukaj">
+            </form>
+            <br>
+            <br>
+            <caption>Nazwa szukanego leku/hurtowni</caption>
+            <table>
+                <tr><th>Nazwa hurtowni/leku</th><th>Ilość sztuk</th><th>Zamów</th></tr>
+                <tr><td>String</td><td>Boolean</td><td><label for="fname">Ilość sztuk:</label><input type="text" id="fname" name="fname"><br><br></td></tr>
+            </table>
+            <br>
+            <br>
+            <form action="#" method="get">
+                <input type="submit" value="Potwierdź zamówienia">
+            </form>
         </article>
 
     </body>
