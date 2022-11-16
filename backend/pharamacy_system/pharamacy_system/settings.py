@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+
+psotgres_pass = os.environ.get('POSTGRES_PASS', '')
+confluence_pass = os.environ.get('CONFLUENCE_AGH_PASS', '')
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -80,7 +84,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'pharmacy',
         'USER': 'postgres',
-        'PASSWORD': 'Qwerty123',
+        'PASSWORD': psotgres_pass,
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -117,7 +121,7 @@ USE_I18N = True
 
 USE_TZ = True
 
-CORS_ORIGIN_ALLOW_ALL=True
+CORS_ORIGIN_ALLOW_ALL = True
 
 CORS_ALLOW_HEADERS = (
     'accept',

@@ -1,20 +1,22 @@
-from rest_framework.views import APIView
-from django.http import HttpResponse, JsonResponse
-import json
-import matplotlib.pyplot as plt
-from rest_framework.decorators import action
 import io
+import json
 import pandas as pd
+import matplotlib.pyplot as plt
 from .models import User
-from .serializers import UserSerializer
-from django.forms import ValidationError
+from rest_framework.views import APIView
+from rest_framework.decorators import action
+from django.http import HttpResponse, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
+
+import sys
+from pharamacy_system import settings
+sys.path.insert(0, '../')
 
 
 class TestAPIView(APIView):
 
     @staticmethod
-    def get(request):
+    def get():
         plt.plot([1, 2, 3, 4], color="pink")
         plt.ylabel('some numbers')
 
@@ -36,9 +38,9 @@ class LogView(APIView):
         user = User.objects.filter(user_name=login).values()
         expected_pass = user[0]['password']
         if expected_pass == password:
-            response = str(json.dumps(str("ok")))
+            response = str(json.dumps("ok"))
         else:
-            response = str(json.dumps(str("denial")))
+            response = str(json.dumps("denial"))
 
         return HttpResponse(response, content_type="text/plain")
 
@@ -59,7 +61,8 @@ class RegisterView(APIView):
         user.save()
         return HttpResponse('Pomyslnie zjerestorwany', status=201, content_type="text/plain")
 
-    def check_user(self, login, mail) -> dict[bool]:
+    @staticmethod
+    def check_user(login, mail) -> dict[str, bool]:
 
         exsist = {'login': True, 'mail': True}
 
@@ -91,8 +94,8 @@ class CustomerSatisfactionView(APIView):
     pass
 
 
-class PDFmanualView(APIView):
-    pass
+class PDFManualView(APIView):
+    password = settings.confluence_pass
 
 
 class DataDrugsView(APIView):
@@ -102,6 +105,6 @@ class DataDrugsView(APIView):
 class DataTestView(APIView):
 
     @action(detail=False, methods=['get'])
-    def get(self, request):
+    def get(self):
         result = pd.DataFrame({'bla': [1, 2, 3], 'bla2': ['a', 'b', 'c']}).to_json(orient='index')
         return JsonResponse(json.loads(result), safe=False)
