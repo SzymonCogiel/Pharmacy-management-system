@@ -16,7 +16,7 @@ sys.path.insert(0, '../')
 class TestAPIView(APIView):
 
     @staticmethod
-    def get():
+    def get(request):
         plt.plot([1, 2, 3, 4], color="pink")
         plt.ylabel('some numbers')
 
@@ -105,6 +105,6 @@ class DataDrugsView(APIView):
 class DataTestView(APIView):
 
     @action(detail=False, methods=['get'])
-    def get(self):
+    def get(self, request):
         result = pd.DataFrame({'bla': [1, 2, 3], 'bla2': ['a', 'b', 'c']}).to_json(orient='index')
         return JsonResponse(json.loads(result), safe=False)
