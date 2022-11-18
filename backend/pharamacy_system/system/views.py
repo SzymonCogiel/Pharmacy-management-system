@@ -58,9 +58,9 @@ class RegisterView(APIView):
         password = request.GET.get('password', None)
         exsist = self.check_user(login, mail)
         if exsist['login']:
-            return HttpResponse('Istnieje juz konto o takim logine', content_type="text/plain")
+            return HttpResponse('Istnieje juz konto o takim logine', status=409, content_type="text/plain")
         elif exsist['mail']:
-            return HttpResponse('Istnieje juz konto o takim mailu', content_type="text/plain")
+            return HttpResponse('Istnieje juz konto o takim mailu', status=409, content_type="text/plain")
         user = User(user_name=login, mail=mail, password=password)
         user.save()
         return HttpResponse('Pomyslnie zjerestorwany', status=201, content_type="text/plain")

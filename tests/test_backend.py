@@ -8,10 +8,10 @@ from sqlalchemy.ext.declarative import declarative_base
 import pandas as pd
 
 pg_pass = os.environ.get('POSTGRES_PASS', '')
+
 engine = sa.create_engine('postgresql+psycopg2://postgres:{0}@localhost:5432/pharmacy'.format(pg_pass))
 Session = sessionmaker(bind=engine)
 session = Session()
-
 base = declarative_base()
 
 
@@ -30,15 +30,14 @@ class Users(base):
         self.password = passsword
 
 
-
 class TestAPI(unittest.TestCase):
 
     def test_login(self):
-        tupl: set = login('szymon', 'zle')
+        tupl = login('szymon', 'zle')
         assert tupl[1]['res'] == 'denial'
 
     def test_register_api(self):
-        tupl: set = register('szymon', 'cogiel@student.agh.edu.pl', 'cs')
+        tupl = register('szymon', 'cogiel@student.agh.edu.pl', 'cs')
         assert tupl[1].decode("utf-8") == 'Istnieje juz konto o takim logine'
 
     def test_register_db(self):
@@ -47,7 +46,7 @@ class TestAPI(unittest.TestCase):
             statement,
             con=engine
         ).count().id
-        tupl: set = register('sfajasasfk', 'pajaaczek@agh.edu.pl', 'passwarsfasf')
+        tupl = register('sfajasasfk', 'pajaaczek@agh.edu.pl', 'passwarsfasf')
         assert tupl[0] == 201
         count_ac = pd.read_sql(
             statement,
@@ -57,7 +56,6 @@ class TestAPI(unittest.TestCase):
         sql2 = delete(Users).where(Users.mail == 'pajaaczek@agh.edu.pl')
         session.execute(sql2)
         session.commit()
-
 
 
 if __name__ == '__main__':
