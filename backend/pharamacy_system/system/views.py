@@ -33,14 +33,18 @@ class LogView(APIView):
     @action(detail=False, methods=['get'])
     def get(self, request):
 
-        login = request.GET.get('login', None)
+        mail = request.GET.get('mail', None)
         password = request.GET.get('password', None)
-        user = User.objects.filter(user_name=login).values()
-        expected_pass = user[0]['password']
+        user = User.objects.filter(mail=mail).values()
+        try:
+            expected_pass = user[0]['password']
+        except IndexError:
+            expected_pass = ''
+
         if expected_pass == password:
-            response = str(json.dumps("ok"))
+            response = str(json.dumps({"res": "ok"}))
         else:
-            response = str(json.dumps("denial"))
+            response = str(json.dumps({"res": "denial"}))
 
         return HttpResponse(response, content_type="text/plain")
 
@@ -104,7 +108,14 @@ class DataDrugsView(APIView):
 
 class DataTestView(APIView):
 
+
     @action(detail=False, methods=['get'])
     def get(self, request):
         result = pd.DataFrame({'bla': [1, 2, 3], 'bla2': ['a', 'b', 'c']}).to_json(orient='index')
         return JsonResponse(json.loads(result), safe=False)
+
+
+class WelcomeView(APIView):
+
+    def get(self, request):
+        name = request.GET.get('login')
