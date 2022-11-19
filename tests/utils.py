@@ -14,3 +14,8 @@ def register(login: str, mail: str, password: str):
     url = URL + "register?login={0}&password={1}&mail={2}".format(login, password, mail)
     r = requests.get(url)
     return r.status_code, r.content
+
+def manualPDF():
+    url = URL + "manual"
+    r = requests.get(url)
+    return r.status_code, r.content
