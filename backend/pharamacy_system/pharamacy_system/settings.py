@@ -14,7 +14,9 @@ from pathlib import Path
 import os
 
 psotgres_pass = os.environ.get('POSTGRES_PASS', '')
-confluence_pass = os.environ.get('CONFLUENCE_AGH_PASS', '')
+confluence_pass = os.environ.get('CONFLUENCE_AGH_TOKEN', '')
+confluence_mail = os.environ.get('ATLASSIAN_AGH_MAIL', '')
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent

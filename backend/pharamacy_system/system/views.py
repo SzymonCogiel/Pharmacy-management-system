@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from rest_framework.decorators import action
 from django.http import HttpResponse, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
+from atlassian import Confluence
 
 import sys
 from pharamacy_system import settings
@@ -99,7 +100,49 @@ class CustomerSatisfactionView(APIView):
 
 
 class PDFManualView(APIView):
-    password = settings.confluence_pass
+
+    def get(self, request):
+        password = settings.confluence_pass
+        user_name = settings.confluence_mail
+        PARENT_PAGE_ID = '491521'
+
+        confluence = Confluence(
+            url='https://spatial-vison.atlassian.net/',
+            username=user_name,
+            password=password,
+            api_version="cloud"
+        )
+
+        children = confluence.get_child_pages(PARENT_PAGE_ID)
+        children = self.tree_downloader(confluence, children)
+        children.append(PARENT_PAGE_ID)
+
+        for i in children:
+            p = confluence.get_page_by_id(i)
+            title = p['title']
+            id = p['id']
+            pdf_name = title + '.pdf'
+            # with open(pdf_name, "wb") as pdf_file:
+            #     pdf_file.write(confluence.get_page_as_pdf(id))
+            pdf = confluence.get_page_as_pdf(id)
+
+
+        response = HttpResponse(pdf, content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="' + pdf_name + '"'
+        return response
+
+    def tree_downloader(self, confluence: Confluence, children: list) -> list:
+        list_id = []
+        for i in children:
+            if isinstance(i, str):
+                i_id = i
+            else:
+                i_id = i['id']
+            grandchildren = confluence.get_child_pages(i_id)
+            list_id.append(i_id)
+            if grandchildren:
+                list_id.extend(self.tree_downloader(confluence, grandchildren))
+        return list_id
 
 
 class DataDrugsView(APIView):
