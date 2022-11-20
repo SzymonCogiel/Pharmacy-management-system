@@ -36,6 +36,11 @@ class TestAPI(unittest.TestCase):
         tupl = login('szymon', 'zle')
         assert tupl[1]['res'] == 'denial'
 
+    def test_manual_PDF(self):
+        r = manualPDF()
+        assert isinstance(r[1], bytes)
+        assert r[0] == 200
+
     def test_register_api(self):
         tupl = register('szymon', 'cogiel@student.agh.edu.pl', 'cs')
         assert tupl[1].decode("utf-8") == 'Istnieje juz konto o takim logine'
@@ -57,10 +62,6 @@ class TestAPI(unittest.TestCase):
         session.execute(sql2)
         session.commit()
 
-    def test_manual_PDF(self):
-        r = manualPDF()
-        assert isinstance(r[1], bytes)
-        assert r[0] == 200
 
 if __name__ == '__main__':
     unittest.main()
