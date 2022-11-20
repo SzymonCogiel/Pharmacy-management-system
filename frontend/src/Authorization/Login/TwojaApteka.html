@@ -3,25 +3,24 @@
 <html>
 
     <head>
-        <link rel="stylesheet" type="text/css" href="../../css/logowanie.css">
+        <link rel="stylesheet" type="text/css" href="logowanie.css">
         <title>TwojaApteka</title>
         <meta charset="utf-8">
     </head>
 
     <body>
 		<div class = "loginbox">
-		<img src="../../img/avatar.png" class = "avatar">
+		<img src="avatar.png" class = "avatar">
 			<h1>Zaloguj się</h1>
 			
-			<form>
-				<p>Login</p>
-				<input type="text" name="nazwa" placeholder="Wpisz swój login">
+			<form action="/login" method="post">
+				<p>Email</p>
+				<input type="text" name="nazwa" placeholder="Wpisz swój email">
 				<p>Hasło</p>
 				<input type="password" name="haslo" placeholder="Wpisz swoje hasło">
 				<input type="submit" name="potwierdzenie" value="Zaloguj">
 				<a href="#">Zapomniałeś hasła?</a> 
 			</form>
-		
 		
 		
 	</body>
