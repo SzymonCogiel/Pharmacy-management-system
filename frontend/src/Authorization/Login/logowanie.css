@@ -2,7 +2,7 @@ body
 {
 	margin: 0px;
 	padding: 0px;
-	background: url(tlo.jpg);
+	background-image: linear-gradient(rgba(0, 0, 30, 0.8), rgba(0, 0, 30, 0.8)), url(tlo.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-attachment: fixed;
@@ -14,7 +14,7 @@ body
 {
 	width: 320px;
 	height: 420px;
-	background: #3a3642;
+	background: #3a3642;  
 	color: #fff;
 	top: 50%;
 	left: 50%;
@@ -56,9 +56,10 @@ h1
 	width: 100%;
 	margin-bottom: 20px;
 	
+	
 }
 
-.loginbox input[type="text"], input[type="password"]
+.loginbox input[type="email"], input[type="password"]
 {
 	border: none;
 	border-bottom: 1px solid #fff;
@@ -79,12 +80,13 @@ h1
 	background: #696374;
 	font-size: 16px;
 	border-radius: 15px;
+	
 }
 
 .loginbox input[type="submit"]:hover
 {
 	cursor: pointer;
-	background: #2faaac;
+	background: #1c3c80;
 }
 
 .loginbox a
@@ -97,5 +99,6 @@ h1
 
 .loginbox a:hover
 {
-	color: #2faaac;
+	color: #1c3c80;
 }
+
