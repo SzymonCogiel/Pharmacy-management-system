@@ -10,6 +10,7 @@ class User(models.Model):
     password = models.CharField(max_length=255)
 
     class Meta:
+        # create view insted use create table during sync
         managed = False
         db_table = 'system_user'
 
@@ -142,7 +143,7 @@ class Drugs(models.Model):
 
 
 class DrugsInfo(models.Model):
-    drugname = models.CharField(max_length=100, blank=True, null=True)
+    drugname = models.CharField(primary_key=True, max_length=200)
     price = models.FloatField(blank=True, null=True)
     amount = models.IntegerField(blank=True, null=True)
 

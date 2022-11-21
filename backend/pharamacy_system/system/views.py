@@ -2,12 +2,14 @@ import io
 import json
 import pandas as pd
 import matplotlib.pyplot as plt
-from .models import User
+from .models import User, Drugs, DrugsInfo
 from rest_framework.views import APIView
 from rest_framework.decorators import action
+from rest_framework.response import Response
 from django.http import HttpResponse, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from atlassian import Confluence
+from .serializers import DrugsSerializer, DrugsInfoSerializer
 
 import sys
 from pharamacy_system import settings
@@ -92,7 +94,34 @@ class SalesAnalysisView(APIView):
 
 
 class StockStatusView(APIView):
-    pass
+
+    @staticmethod
+    def get(request):
+        drugname = request.GET.get('drugname')
+        price = request.GET.get('price')
+        amount = request.GET.get('amount')
+
+        drugInfo = DrugsInfo.objects.all()
+
+
+        if drugname == "undefined":
+            pass
+        elif drugname:
+            drugInfo = drugInfo.filter(drugname=drugname)
+
+        if price == "undefined":
+            pass
+        elif price:
+            drugInfo = drugInfo.filter(price=price)
+
+        if amount == "undefined":
+            pass
+        elif amount:
+            drugInfo = drugInfo.filter(amount=amount)
+
+
+        serializer = DrugsInfoSerializer(drugInfo, many=True)
+        return Response(serializer.data)
 
 
 class CustomerSatisfactionView(APIView):
@@ -146,19 +175,45 @@ class PDFManualView(APIView):
 
 
 class DataDrugsView(APIView):
-    pass
+
+    @staticmethod
+    def get(request):
+        drugname = request.GET.get('drugname')
+        condition = request.GET.get('condition')
+        review = request.GET.get('review')
+        rating = request.GET.get('rating')
+        useful = request.GET.get('rating')
+
+        drug = Drugs.objects.all()
+
+        if drugname == "undefined":
+            pass
+        elif drugname:
+            drug = drug.filter(drugname=drugname)
+
+        if condition == "undefined":
+            pass
+        elif condition:
+            drug = drug.filter(condition=condition)
+
+        if rating == "undefined" or rating == "all":
+            pass
+        elif rating:
+            drug = drug.filter(rating=rating)
+
+        if useful == "undefined" or useful == "all":
+            pass
+        elif useful:
+            drug = drug.filter(useful=useful)
+
+        serializer = DrugsSerializer(drug, many=True)
+        return Response(serializer.data)
 
 
 class DataTestView(APIView):
-
 
     @action(detail=False, methods=['get'])
     def get(self, request):
         result = pd.DataFrame({'bla': [1, 2, 3], 'bla2': ['a', 'b', 'c']}).to_json(orient='index')
         return JsonResponse(json.loads(result), safe=False)
 
-
-class WelcomeView(APIView):
-
-    def get(self, request):
-        name = request.GET.get('login')
