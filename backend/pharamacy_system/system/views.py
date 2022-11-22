@@ -119,7 +119,6 @@ class StockStatusView(APIView):
         elif amount:
             drugInfo = drugInfo.filter(amount=amount)
 
-
         serializer = DrugsInfoSerializer(drugInfo, many=True)
         return Response(serializer.data)
 
@@ -154,7 +153,6 @@ class PDFManualView(APIView):
             # with open(pdf_name, "wb") as pdf_file:
             #     pdf_file.write(confluence.get_page_as_pdf(id))
             pdf = confluence.get_page_as_pdf(id)
-
 
         response = HttpResponse(pdf, content_type='application/pdf')
         response['Content-Disposition'] = 'attachment; filename="' + pdf_name + '"'
@@ -216,4 +214,3 @@ class DataTestView(APIView):
     def get(self, request):
         result = pd.DataFrame({'bla': [1, 2, 3], 'bla2': ['a', 'b', 'c']}).to_json(orient='index')
         return JsonResponse(json.loads(result), safe=False)
-

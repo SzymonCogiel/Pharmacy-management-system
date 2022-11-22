@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import logging
+import sys
 
 psotgres_pass = os.environ.get('POSTGRES_PASS', '')
 confluence_pass = os.environ.get('CONFLUENCE_AGH_TOKEN', '')
@@ -113,6 +115,41 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGFILE_ROOT = os.path.dirname(BASE_DIR)
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'stream': sys.stdout,
+        },
+        'request': {
+            'level': 'WARNING',
+            'class': 'logging.handlers.RotatingFileHandler',
+            # 'formatter': 'request_formatter',
+            'filename': os.path.join(LOGFILE_ROOT, 'requests.log'),
+            'maxBytes': 1024000,
+            'backupCount': 3
+        },
+        'django': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': os.path.join(LOGFILE_ROOT, 'django.log'),
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'level': 'WARNING',
+            'handlers': ['request', 'console']
+        },
+        'django': {
+            'handlers': ['django', 'console'],
+            'level': 'INFO',
+        },
+    },
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

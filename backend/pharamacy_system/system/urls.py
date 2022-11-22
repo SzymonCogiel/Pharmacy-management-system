@@ -9,5 +9,4 @@ urlpatterns = [
     path('pharamcy/manual', PDFManualView.as_view()),
     path('pharamcy/drugs', DataDrugsView.as_view()),
     path('pharamcy/stock', StockStatusView.as_view()),
-
 ]
