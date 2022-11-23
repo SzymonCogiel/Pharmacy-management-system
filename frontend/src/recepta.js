@@ -5,12 +5,13 @@ import {useState, useEffect} from 'react';
 import Form from "react-bootstrap/Form";
 
 
-function Dostepne_leki() {
+function Recepta() {
   const [data, setData] = useState([]);
-  const [name, setName] = useState("");
+  const [pesel, setPesel] = useState("");
+  const [number, setNumber] = useState("");
 
   const fetchData = () => {
-      const url = `http://127.0.0.1:8000/api/pharamcy/stock?drugname=${name}`
+      const url = `http://127.0.0.1:8000/api/pharamcy/recepty?pesel=${pesel}&number=${number}`
     fetch(url)
       .then((response) => response.json())
       .then((actualData) => {
@@ -25,7 +26,7 @@ function Dostepne_leki() {
 
   useEffect(() => {
     fetchData();
-  }, [name]);
+  }, [ pesel]);
 
 
   const zmieniacz = () =>{
@@ -66,39 +67,32 @@ function Dostepne_leki() {
                         <a href="./App.js">Wyloguj</a>
                     </ul>
                 </nav>
-        <article>
-            <h2>Dostępne leki</h2>
-
-            <Form>
-            <Form.Group size="lg" controlId="name">
-                    <Form.Label>Nazwa:</Form.Label>
+                <article>
+                  <br />
+                <Form>
+                    <Form.Group size="lg" controlId="number">
+                    <Form.Label>Numer recepty :</Form.Label>
                     <Form.Control
                         autoFocus
                         type="text"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)} />
-            </Form.Group>
-                <input type="hidden" name="ie" value="utf-8" />
-                <input type="radio" name="lr" value="" id="lr0" checked /> <label for="lr0">Sortuj według miejsca</label>
-                <input type="radio" name="lr" value="lang_pl" id="lr1" /> <label for="lr1">Sortuj według liczby sztuk</label>
-            </Form>
-            <br />
-            <br />
-            <table>
-              {/* tu w tabeli do dorobienia jeszcze recepta i miejsce położenia(jakis randomowy zlep typu M-13 jako półka) + sortowania */}
-            <tr><th>Nazwa</th><th>Liczba sztuk</th><th>Cena</th></tr>
-             {data.map((item, index) => (
-             <tr key={index}>
-            <td>{item.drugname}</td>
-            <td>{item.amount}</td>
-            <td>{item.price}</td>
-            </tr>
-            ))}
-            </table>         
-        </article>
+                        value={number}
+                        onChange={(e) => setNumber(e.target.value)} />
+                    </Form.Group>
+                    <br /><br />
+                    <Form.Group size="lg" controlId="pesel">
+                    <Form.Label>Pesel:</Form.Label>
+                    <Form.Control
+                        type="text"
+                        value={pesel}
+                        onChange={(e) => setPesel(e.target.value)}/>
+                    </Form.Group>
+                    <br />
+                        <Button block="true" size="lg" type="submit" onClick={zmieniacz} id="dodaj">Dodaj produkt</Button>
+                    </Form>
+                </article>
       </div>
     );
 
 }
 
-export default Dostepne_leki;
+export default Recepta;

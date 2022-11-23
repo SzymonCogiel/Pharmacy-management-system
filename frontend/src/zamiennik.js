@@ -1,11 +1,10 @@
 
-import Button from 'react-bootstrap/esm/Button';
 import './panel.css';
 import {useState, useEffect} from 'react';
 import Form from "react-bootstrap/Form";
 
 
-function Dostepne_leki() {
+function Zamiennik() {
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
 
@@ -35,6 +34,7 @@ function Dostepne_leki() {
 
     return (
       <div className="App">
+        <body>
         <header>
           <h1>TwojaApteka: Panel Pracownika</h1>
         </header>
@@ -67,7 +67,7 @@ function Dostepne_leki() {
                     </ul>
                 </nav>
         <article>
-            <h2>Dostępne leki</h2>
+            <h2>Wyszukiwarka leków</h2>
 
             <Form>
             <Form.Group size="lg" controlId="name">
@@ -79,26 +79,23 @@ function Dostepne_leki() {
                         onChange={(e) => setName(e.target.value)} />
             </Form.Group>
                 <input type="hidden" name="ie" value="utf-8" />
-                <input type="radio" name="lr" value="" id="lr0" checked /> <label for="lr0">Sortuj według miejsca</label>
-                <input type="radio" name="lr" value="lang_pl" id="lr1" /> <label for="lr1">Sortuj według liczby sztuk</label>
+                <input type="radio" name="lr" value="" id="lr0" checked /> <label for="lr0">Sortuj według nazwy</label>
+                <input type="radio" name="lr" value="lang_pl" id="lr1" /> <label for="lr1">Sortuj według odległości</label>
+                <input type="submit" value="Szukaj" />
             </Form>
             <br />
             <br />
+            <caption>{name}</caption>
             <table>
-              {/* tu w tabeli do dorobienia jeszcze recepta i miejsce położenia(jakis randomowy zlep typu M-13 jako półka) + sortowania */}
-            <tr><th>Nazwa</th><th>Liczba sztuk</th><th>Cena</th></tr>
-             {data.map((item, index) => (
-             <tr key={index}>
-            <td>{item.drugname}</td>
-            <td>{item.amount}</td>
-            <td>{item.price}</td>
-            </tr>
-            ))}
-            </table>         
+                {/* potrzebna mi tutaj tabelka i sortowania*/}
+                <tr><th>Dostępna u nas</th><th>Dostępna w filiach</th><th>Możliwe zamienniki</th></tr>
+                <tr><td>Boolean</td><td>String</td><td>String</td></tr>
+            </table>        
         </article>
+        </body>  
       </div>
     );
 
 }
 
-export default Dostepne_leki;
+export default Zamiennik;

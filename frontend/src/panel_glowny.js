@@ -1,13 +1,31 @@
 
 import './panel.css';
-import { useFetch} from 'react';
+import {useState, useEffect} from 'react';
 
 
 
 function Panel() {
-	const [name, getName] = useFetch("api");
-	const [surname, getSurname] = useFetch("api");
-	const [filia, getFilia] = useFetch("api");
+    const [user, setUser] = useState([]);
+    const [mail, setMail] = useState("");
+	const [password, setPassword] = useState("");
+
+    const fetchData = () => {
+        const url = `http://127.0.0.1:8000/api/pharamcy/login?mail=${mail}&password=${password}`;
+      fetch(url)
+        .then((response) => response.json())
+        .then((actualData) => {
+          console.log(actualData);
+          setUser(actualData);
+          console.log(user);
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
+    };
+  
+    useEffect(() => {
+      fetchData();
+    }, []);
 
 
   return (
@@ -46,9 +64,9 @@ function Panel() {
 
                 <article>
                     <p>
-                        Zalogowałeś się jako: getName() getSurname()
+                        Zalogowałeś się jako: {user.name} {user.surname}
                         <br></br>
-                        Pracujesz w filii: getFilia()
+                        Pracujesz w filii: {user.filia}
                     </p>
                 </article>
         </div>
