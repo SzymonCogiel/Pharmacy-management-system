@@ -13,6 +13,9 @@ import Recepta from './recepta';
 import Hurtownia from './hurtownia';
 import Edycja from './edycja';
 import Edycja_Admin from './edycja_admin';
+import Usuwanie from './usuwanie_pracownika';
+import Edytowanie_pracownika from './edytowanie_pracownika';
+import Zmiana from './zmiana_hasla';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -27,9 +30,10 @@ root.render(
     { /* <Hurtownia /> */}
     {/*<Register />*/} 
     {/*< Edycja />*/}
-    <Edycja_Admin /> 
-
-
+    { /*<Edycja_Admin /> */}
+    {/*<Usuwanie />*/}
+    {/* <Edytowanie_pracownika/> */}
+    <Zmiana/>
   </React.StrictMode>
 );
 

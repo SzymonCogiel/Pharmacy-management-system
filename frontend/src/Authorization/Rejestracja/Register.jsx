@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import bglmg from './avatar.png';
-import './App.css';
+import './Adam.css';
 import { useForm } from 'react-hook-form';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
