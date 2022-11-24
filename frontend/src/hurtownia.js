@@ -9,7 +9,7 @@ function Hurtownia() {
   const [name, setName] = useState("");
 
   const fetchData = () => {
-      const url = `http://127.0.0.1:8000/api/pharamcy/stock?drugname=${name}`
+      const url = `http://127.0.0.1:8000/api/pharamcy/hurtownia?drugname=${name}`
     fetch(url)
       .then((response) => response.json())
       .then((actualData) => {
@@ -69,16 +69,23 @@ function Hurtownia() {
                 <article>
                     <h2>Zamówienia</h2>
 
-                    <form action="#" method="get">
-                        <input type="text" name="q" />
-                        <input type="hidden" name="ie" value="utf-8" />
+                    <form>
+                      <Form.Group size="lg" controlId="email">
+                      <Form.Label>Nazwa leku/hurtowni</Form.Label>
+                      <Form.Control
+                          autoFocus
+                          type="name"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          />
+                        </Form.Group>
                         <input type="radio" name="lr" value="" id="lr0" checked /> <label for="lr0">Szukaj po nazwie</label>
                         <input type="radio" name="lr" value="lang_pl" id="lr1" /> <label for="lr1">Szukaj po hurtowni</label>
                         <input type="submit" value="Szukaj" />
                     </form>
                     <br />
                     <br />
-                    <caption>Nazwa szukanego leku/hurtowni</caption>
+                    <caption>{name}</caption>
                     <table>
                         <tr><th>Nazwa hurtowni/leku</th><th>Ilość sztuk</th><th>Zamów</th></tr>
                         <tr><td>String</td><td>Boolean</td><td><label for="fname">Ilość sztuk:</label><input type="text" id="fname" name="fname" /><br /><br /></td></tr>
