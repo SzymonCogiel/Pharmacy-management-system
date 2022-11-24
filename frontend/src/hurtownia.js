@@ -7,6 +7,9 @@ import Form from "react-bootstrap/Form";
 function Hurtownia() {
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
+  const [radio, setRadio] = useState({"D":"H"});
+
+
 
   const fetchData = () => {
       const url = `http://127.0.0.1:8000/api/pharamcy/hurtownia?drugname=${name}`
@@ -24,7 +27,7 @@ function Hurtownia() {
 
   useEffect(() => {
     fetchData();
-  }, [name]);
+  }, [radio]);
 
 
   const zmieniacz = () =>{
@@ -71,7 +74,7 @@ function Hurtownia() {
 
                     <form>
                       <Form.Group size="lg" controlId="email">
-                      <Form.Label>Nazwa leku/hurtowni</Form.Label>
+                      <Form.Label>Nazwa leku/hurtowni </Form.Label>
                       <Form.Control
                           autoFocus
                           type="name"
@@ -79,8 +82,8 @@ function Hurtownia() {
                           onChange={(e) => setName(e.target.value)}
                           />
                         </Form.Group>
-                        <input type="radio" name="lr" value="" id="lr0" checked /> <label for="lr0">Szukaj po nazwie</label>
-                        <input type="radio" name="lr" value="lang_pl" id="lr1" /> <label for="lr1">Szukaj po hurtowni</label>
+                        <input type="radio" name="lr" value={radio} id="lr0" checked /> <label for="lr0">Szukaj po nazwie</label>
+                        <input type="radio" name="lr" value={radio} id="lr1" /> <label for="lr1">Szukaj po hurtowni</label>
                         <input type="submit" value="Szukaj" />
                     </form>
                     <br />

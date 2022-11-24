@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import Register from './Authorization/Rejestracja/Register';
 import Sprzedaz from './sprzedaz';
 import Panel from './panel_glowny';
 import Dostepne_leki from './dostepne_leki';
@@ -10,6 +11,8 @@ import Bez_recepty from './bez_recepty';
 import Zamiennik from './zamiennik';
 import Recepta from './recepta';
 import Hurtownia from './hurtownia';
+import Edycja from './edycja';
+import Edycja_Admin from './edycja_admin';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -21,8 +24,10 @@ root.render(
     {/*<Sprzedaz /> */} 
     { /*<Recepta /> */}
     { /*<Bez_recepty />*/}
-    <Hurtownia /> 
-
+    { /* <Hurtownia /> */}
+    {/*<Register />*/} 
+    {/*< Edycja />*/}
+    <Edycja_Admin /> 
 
 
   </React.StrictMode>
