@@ -54,16 +54,16 @@ h1
 .registrationbox  input
 {
 	width: 100%;
-    background: transparent;
-    outline: 1px;
-    border: 1px;
+  background: transparent;
+  outline: 1px;
+  border: 1px;
 	padding: 8px;
     
 	
 }
 
 
-.registrationbox input[type="submit"]
+button
 {
 	border: none;
 	height: 40px;
@@ -72,18 +72,17 @@ h1
 	background: #696374;
 	font-size: 16px;
 	border-radius: 15px;
-    
-    
-    
+  align-items: center;
+  width: 100%;
 }
 
-.registrationbox input[type="submit"]:hover
+button:hover
 {
 	cursor: pointer;
 	background: #1c3c80;
 }
 
-.registrationbox i
+.icon
 {
     margin-left: 8px;
     color: #999;
