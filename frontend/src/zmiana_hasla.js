@@ -10,7 +10,7 @@ function Zmiana() {
   const [newPass, setNewPass] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [oldPass, setOldPass] = useState("");
-  const [mail, setMail] = useState("");
+  const [mail, setMail] = useState("jpapros@student.agh.edu.pl");
   const [auth, setAuth] = useState("");
   const [logRes, setLogRes] = useState({"res": "F"});
 
@@ -28,13 +28,28 @@ function Zmiana() {
       });
   };
 
-  useEffect(() => {
+  const fetchData2 = () => {
+    const url = `http://127.0.0.1:8000/api/pharamcy/updatepass?mail=${mail}&new_password=${newPass}`;
+    fetch(url)
+      .then((response) => response.json())
+      .then((actualData) => {
+        console.log(actualData);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+
+  /*useEffect(() => {
     fetchData();
-  }, []);
+  }, []);*/
 
 
   const check = () =>{
     if(newPass == newPassword){
+      fetchData();
         return true
     }
     else {
@@ -43,17 +58,9 @@ function Zmiana() {
   }
 
   const validateForm = () => {
-    if(logRes === 'ok'){
-        console.log("confirm")
-        setAuth("git")
-        data.password = oldPass;
-        return true
-    }
-    if (logRes === 'denial') {
-        console.log('denail')
-        setAuth("zle haslo lub mail")
-        return false
-    }
+
+        fetchData2();
+       
 }
 
     return (
@@ -115,7 +122,7 @@ function Zmiana() {
             onChange={(e) => setOldPass(e.target.value)}
           />
         </Form.Group><br /><br />
-        <Button block="true" size="lg" type="submit" onClick={validateForm} onclick="alert('Twoje hasło zostało zmienione')" id="zzmień">
+        <Button block="true" size="lg" type="submit" onClick={validateForm}  id="zmien">
 				Zmień hasło
 				</Button>
             </Form>
