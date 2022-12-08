@@ -21,19 +21,19 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    {/* <Panel /> */}
-    { /*<Dostepne_leki/> */}
+    <Panel />
+    {/* <Dostepne_leki/>  */}
     {/* <Zamiennik /> */}
-    {/*<Sprzedaz /> */} 
-    { /*<Recepta /> */}
-    { /*<Bez_recepty />*/}
-    { /* <Hurtownia /> */}
+    {/* <Sprzedaz />  */}
+    {/* <Recepta /> */}
+    { /*<Bez_recepty /> */}
+    {/* <Hurtownia /> */}
     {/*<Register />*/} 
     {/*< Edycja />*/}
     { /*<Edycja_Admin /> */}
     {/*<Usuwanie />*/}
     {/* <Edytowanie_pracownika/> */}
-    <Zmiana/>
+    {/* <Zmiana/> */}
   </React.StrictMode>
 );
 

@@ -216,3 +216,19 @@ class DataTestView(APIView):
     def get(self, request):
         result = pd.DataFrame({'bla': [1, 2, 3], 'bla2': ['a', 'b', 'c']}).to_json(orient='index')
         return JsonResponse(json.loads(result), safe=False)
+
+
+class UpdatePasswordView(APIView):
+
+    @action(detail=False, methods=['get'])
+    def get(self, request):
+        mail = request.GET.get('mail')
+        new_password = request.GET.get('new_password')
+        try:
+            User.objects.filter(mail=mail).update(password=str(new_password))
+        except:
+            response = str(json.dumps({"res": "denial"}))
+            return HttpResponse(response, content_type="text/plain")
+
+        response = str(json.dumps({"res": "ok"}))
+        return HttpResponse(response, content_type="text/plain")
