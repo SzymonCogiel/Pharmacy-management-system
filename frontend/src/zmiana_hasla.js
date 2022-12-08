@@ -27,7 +27,7 @@ function Zmiana() {
         console.log(err.message);
       });
   };
-
+//jest swietnie
   const fetchData2 = () => {
     const url = `http://127.0.0.1:8000/api/pharamcy/updatepass?mail=${mail}&new_password=${newPass}`;
     fetch(url)

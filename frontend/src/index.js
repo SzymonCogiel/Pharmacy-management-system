@@ -23,7 +23,7 @@ root.render(
   <React.StrictMode>
     {/* <App /> */}
     {/* <Panel /> */}
-    { /*<Dostepne_leki/> */}
+    <Dostepne_leki/>
     {/* <Zamiennik /> */}
     {/*<Sprzedaz /> */} 
     { /*<Recepta /> */}
@@ -34,7 +34,7 @@ root.render(
     { /*<Edycja_Admin /> */}
     {/*<Usuwanie />*/}
     {/* <Edytowanie_pracownika/> */}
-    <Zmiana/>
+    {/*<Zmiana/>*/}
     {/*<Dashboard/>*/}
   </React.StrictMode>
 );
