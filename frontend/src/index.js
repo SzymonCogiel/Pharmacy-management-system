@@ -25,10 +25,10 @@ root.render(
     {/* <Panel /> */}
     <Dostepne_leki/>
     {/* <Zamiennik /> */}
-    {/*<Sprzedaz /> */} 
-    { /*<Recepta /> */}
-    { /*<Bez_recepty />*/}
-    { /* <Hurtownia /> */}
+    {/* <Sprzedaz />  */}
+    {/* <Recepta /> */}
+    { /*<Bez_recepty /> */}
+    {/* <Hurtownia /> */}
     {/*<Register />*/} 
     {/*< Edycja />*/}
     { /*<Edycja_Admin /> */}
