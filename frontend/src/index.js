@@ -16,13 +16,14 @@ import Edycja_Admin from './edycja_admin';
 import Usuwanie from './usuwanie_pracownika';
 import Edytowanie_pracownika from './edytowanie_pracownika';
 import Zmiana from './zmiana_hasla';
+import Dashboard from './dashboard';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     {/* <App /> */}
-    <Panel />
-    {/* <Dostepne_leki/>  */}
+    {/* <Panel /> */}
+    <Dostepne_leki/>
     {/* <Zamiennik /> */}
     {/* <Sprzedaz />  */}
     {/* <Recepta /> */}
@@ -33,7 +34,8 @@ root.render(
     { /*<Edycja_Admin /> */}
     {/*<Usuwanie />*/}
     {/* <Edytowanie_pracownika/> */}
-    {/* <Zmiana/> */}
+    {/*<Zmiana/>*/}
+    {/*<Dashboard/>*/}
   </React.StrictMode>
 );
 
