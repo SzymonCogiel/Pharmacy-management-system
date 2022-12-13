@@ -33,35 +33,6 @@ function Panel() {
                 <header>
                     <h1>TwojaApteka: Panel Pracownika</h1>
                 </header>
-
-
-                <nav>
-                    <ul>
-                        <a href="panel_glowny.js">Strona główna</a> 
-                        <br></br>
-                        <hr></hr>
-                        <a href="dostepne_leki.js">Dostępne leki</a> 
-                        <br></br>
-                        <hr></hr>
-                        <a href="zamiennik.js">Znajdź lek lub zamiennik</a>
-                        <br></br>
-                        <hr></hr>                  
-                        <a href="sprzedaz.js">Dokonaj sprzedaży</a>
-                        <br></br>
-                        <hr></hr>
-                        <a href="hurtownia.js">Zamów z hurtowni</a>
-                        <br></br>
-                        <hr></hr>
-                        <a href="#">Generuj raport</a>
-                        <br></br>
-                        <hr></hr>
-                        <a href="edycja.js">Zarządzaj kontem</a>
-                        <br></br>
-                        <hr></hr>
-                        <a href="./App.js">Wyloguj</a>
-                    </ul>
-                </nav>
-
                 <article>
                     <p>
                         Zalogowałeś się jako: {user.name} {user.surname}
