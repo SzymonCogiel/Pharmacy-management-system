@@ -1,6 +1,14 @@
 import { Outlet, Link } from "react-router-dom";
+import { useModal } from 'react-hooks-use-modal';
+import './panel.css';
 
 const Layout = () => {
+
+    const [Modal, open, close, isOpen] = useModal('root', {
+        preventScroll: true,
+        closeOnOverlayClick: false
+      });
+
   return (
     <>
       <nav>
@@ -16,12 +24,28 @@ const Layout = () => {
                         <br></br>
                         <hr></hr>
                         <li>
-                            <Link to="/zamie">Znajdź lek lub zamiennik</Link>
+                            <Link to="/zamie" onClick={open}>      
+                            <Modal >
+                                <div>
+                                <h1>Uwaga!!!</h1>
+                                <p>Strona w trakcie budowy <br/> Za utrudnienia przepraszamy!</p>
+                                </div>
+                            </Modal>
+                            Znajdź lek lub zamiennik
+                            </Link>
                         </li>
                         <br></br>
                         <hr></hr>                  
                         <li>
-                            <Link to="/sprzedaz">Dokonaj sprzedaży</Link>
+                            <Link to="/sprzedaz" onClick={open}>
+                            <Modal >
+                                <div>
+                                <h1>Uwaga!!!</h1>
+                                <p>Strona w trakcie budowy <br/> Za utrudnienia przepraszamy!</p>
+                                </div>
+                            </Modal>
+                                Dokonaj sprzedaży
+                            </Link>
                         </li>
                         <br></br>
                         <hr></hr>

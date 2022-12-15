@@ -2,11 +2,12 @@
 import './panel.css';
 import {useState, useEffect} from 'react';
 import Form from "react-bootstrap/Form";
-
+import './panel.css';
 
 function Zamiennik() {
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
+
 
   const fetchData = () => {
       const url = `http://127.0.0.1:8000/api/pharamcy/stock?drugname=${name}`
@@ -29,6 +30,7 @@ function Zamiennik() {
 
     return (
       <div className="App">
+      
         <body>
         <header>
           <h1>TwojaApteka: Panel Pracownika</h1>

@@ -34,9 +34,12 @@ export default function AppDef() {
           <Route path="hurtownia" element={<Hurtownia />} />
           <Route path="dostepneleki" element={<Dostepne_leki />} />
           <Route path="zamie" element={<Zamiennik />} />
-          <Route path="sprzedaz" element={<Hurtownia />} />
+          <Route path="sprzedaz" element={<Sprzedaz />} />
+          <Route path="recepta" element={<Recepta />} />
+          <Route path="bez_recepty" element={<Bez_recepty />} />
           <Route path="raport" element={<Dashboard />} />
-          <Route path="edycja" element={<Zmiana />} />
+          <Route path="edycja" element={<Edycja />} />
+          <Route path="zmiana" element={<Zmiana />} />
           <Route path="*" element={<NoPage />} />
         </Route>
       </Routes>

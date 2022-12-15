@@ -5,12 +5,14 @@ import {useState, useEffect} from 'react';
 
 
 function Panel() {
+    const [name, setName] = useState("");
+    const [surname, setSurame] = useState("");
+    const [pharmacy, setPharmacy] = useState("");
     const [user, setUser] = useState([]);
-    const [mail, setMail] = useState("");
-	const [password, setPassword] = useState("");
+    const [mail, setMail] = useState(localStorage.getItem("mail"));
 
     const fetchData = () => {
-        const url = `http://127.0.0.1:8000/api/pharamcy/login?mail=${mail}&password=${password}`;
+        const url = `http://127.0.0.1:8000/api/pharamcy/user?mail=${mail}`;
       fetch(url)
         .then((response) => response.json())
         .then((actualData) => {
@@ -25,7 +27,7 @@ function Panel() {
   
     useEffect(() => {
       fetchData();
-    }, []);
+    }, [mail]);
 
 
   return (
@@ -34,11 +36,13 @@ function Panel() {
                     <h1>TwojaApteka: Panel Pracownika</h1>
                 </header>
                 <article>
-                    <p>
-                        Zalogowałeś się jako: {user.name} {user.surname}
+                {user.map((item, index) => (
+                    <p key={index}>
+                        Zalogowałeś się jako: {item.name} {item.surname}
                         <br></br>
-                        Pracujesz w filii: {user.filia}
+                        Pracujesz w filii: {item.pharmacy}
                     </p>
+                    ))}          
                 </article>
         </div>
   );
