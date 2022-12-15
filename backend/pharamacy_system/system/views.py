@@ -9,7 +9,7 @@ from rest_framework.response import Response
 from django.http import HttpResponse, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from atlassian import Confluence
-from .serializers import DrugsSerializer, DrugsInfoSerializer
+from .serializers import DrugsSerializer, DrugsInfoSerializer, UserSerializer
 
 import sys
 from pharamacy_system import settings
@@ -62,15 +62,16 @@ class RegisterView(APIView):
         login = request.GET.get('login', None)
         name = request.GET.get('name', None)
         surname = request.GET.get('surname', None)
+        pharmacy = request.GET.get('pharmacy', None)
         password = request.GET.get('password', None)
         exsist = self.check_user(login, mail)
         if exsist['login']:
             return HttpResponse('Istnieje juz konto o takim logine', status=409, content_type="text/plain")
         elif exsist['mail']:
             return HttpResponse('Istnieje juz konto o takim mailu', status=409, content_type="text/plain")
-        user = User(user_name=login, mail=mail, password=password, name=name, surname=surname)
+        user = User(user_name=login, mail=mail, password=password, name=name, surname=surname, pharmacy=pharmacy)
         user.save()
-        return HttpResponse('Pomyslnie zjerestorwany', status=201, content_type="text/plain")
+        return HttpResponse('Pomyslnie zarejestrowany', status=201, content_type="text/plain")
 
     @staticmethod
     def check_user(login, mail) -> dict[str, bool]:
@@ -104,7 +105,8 @@ class StockStatusView(APIView):
         drugname = request.GET.get('drugname')
         price = request.GET.get('price')
         amount = request.GET.get('amount')
-
+        prescription = request.GET.get('prescription')
+        warehouse = request.GET.get('warehouse')
         drugInfo = DrugsInfo.objects.all()
 
 
@@ -122,6 +124,16 @@ class StockStatusView(APIView):
             pass
         elif amount:
             drugInfo = drugInfo.filter(amount=amount)
+
+        if prescription == "undefined":
+            pass
+        elif prescription:
+            drugInfo = drugInfo.filter(prescription=prescription)
+
+        if warehouse == "undefined":
+            pass
+        elif warehouse:
+            drugInfo = drugInfo.filter(warehouse=warehouse)
 
         serializer = DrugsInfoSerializer(drugInfo, many=True)
         return Response(serializer.data)
@@ -184,7 +196,7 @@ class DataDrugsView(APIView):
         condition = request.GET.get('condition')
         review = request.GET.get('review')
         rating = request.GET.get('rating')
-        useful = request.GET.get('rating')
+        useful = request.GET.get('useful')
 
         drug = Drugs.objects.all()
 
@@ -243,3 +255,18 @@ class UserInfoView(APIView):
         user = User.objects.filter(mail=mail).values()
         response = str(json.dumps({"res": str(user)}))
         return HttpResponse(response, content_type="text/plain")
+
+class UserView(APIView):
+
+        @staticmethod
+        def get(request):
+            name = request.GET.get('name')
+            surname = request.GET.get('surname')
+            pharmacy = request.GET.get('pharmacy')
+            mail = request.GET.get('mail')
+            userInfo = User.objects.filter(mail=mail).all()
+
+
+
+            serializer = UserSerializer(userInfo, many=True)
+            return Response(serializer.data)

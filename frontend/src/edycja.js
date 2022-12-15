@@ -1,4 +1,4 @@
-
+import { Outlet, Link } from "react-router-dom";
 import './panel.css';
 
 
@@ -13,7 +13,7 @@ function Edycja() {
                 </header>
 
                 <article>
-                <a href="zmiana_hasla.js">Zmień swoje hasło</a>
+                <Link to="/zmiana">Zmień swoje haslo</Link>
                 </article>
             </div>
   );

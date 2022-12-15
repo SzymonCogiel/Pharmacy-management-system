@@ -84,7 +84,7 @@ function Zmiana() {
             onChange={(e) => setOldPass(e.target.value)}
           />
         </Form.Group><br /><br />
-        <Button block="true" size="lg" type="submit" onClick={validateForm} onclick="alert('Twoje hasło zostało zmienione')" id="zzmień">
+        <Button block="true" size="lg" type="submit" onClick={validateForm} id="zzmień">
 				Zmień hasło
 				</Button>
             </Form>
