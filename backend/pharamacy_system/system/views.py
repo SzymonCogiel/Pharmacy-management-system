@@ -39,10 +39,12 @@ class LogView(APIView):
         mail = request.GET.get('mail', None)
         password = request.GET.get('password', None)
         user = User.objects.filter(mail=mail).values()
+
         try:
             expected_pass = user[0]['password']
         except IndexError:
-            expected_pass = ''
+            response = str(json.dumps({"res": "denial"}))
+            return HttpResponse(response, content_type="text/plain")
 
         if expected_pass == password:
             response = str(json.dumps({"res": "ok"}))
@@ -231,4 +233,13 @@ class UpdatePasswordView(APIView):
             return HttpResponse(response, content_type="text/plain")
 
         response = str(json.dumps({"res": "ok"}))
+        return HttpResponse(response, content_type="text/plain")
+
+class UserInfoView(APIView):
+
+    @action(detail=False, methods=['get'])
+    def get(self, request):
+        mail = request.GET.get('mail')
+        user = User.objects.filter(mail=mail).values()
+        response = str(json.dumps({"res": str(user)}))
         return HttpResponse(response, content_type="text/plain")
