@@ -58,13 +58,15 @@ class RegisterView(APIView):
     def get(self, request):
         mail = request.GET.get('mail', None)
         login = request.GET.get('login', None)
+        name = request.GET.get('name', None)
+        surname = request.GET.get('surname', None)
         password = request.GET.get('password', None)
         exsist = self.check_user(login, mail)
         if exsist['login']:
             return HttpResponse('Istnieje juz konto o takim logine', status=409, content_type="text/plain")
         elif exsist['mail']:
             return HttpResponse('Istnieje juz konto o takim mailu', status=409, content_type="text/plain")
-        user = User(user_name=login, mail=mail, password=password)
+        user = User(user_name=login, mail=mail, password=password, name=name, surname=surname)
         user.save()
         return HttpResponse('Pomyslnie zjerestorwany', status=201, content_type="text/plain")
 
@@ -220,3 +222,19 @@ class DataTestView(APIView):
     def get(self, request):
         result = pd.DataFrame({'bla': [1, 2, 3], 'bla2': ['a', 'b', 'c']}).to_json(orient='index')
         return JsonResponse(json.loads(result), safe=False)
+
+
+class UpdatePasswordView(APIView):
+
+    @action(detail=False, methods=['get'])
+    def get(self, request):
+        mail = request.GET.get('mail')
+        new_password = request.GET.get('new_password')
+        try:
+            User.objects.filter(mail=mail).update(password=str(new_password))
+        except:
+            response = str(json.dumps({"res": "denial"}))
+            return HttpResponse(response, content_type="text/plain")
+
+        response = str(json.dumps({"res": "ok"}))
+        return HttpResponse(response, content_type="text/plain")

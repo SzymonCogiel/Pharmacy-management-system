@@ -8,6 +8,8 @@ class User(models.Model):
     user_name = models.CharField(max_length=255)
     mail = models.CharField(max_length=255)
     password = models.CharField(max_length=255)
+    name = models.CharField(max_length=255)
+    surname = models.CharField(max_length=255)
 
     class Meta:
         # create view insted use create table during sync
