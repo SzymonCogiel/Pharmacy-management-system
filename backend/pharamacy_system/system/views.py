@@ -102,7 +102,6 @@ class StockStatusView(APIView):
         drugname = request.GET.get('drugname')
         price = request.GET.get('price')
         amount = request.GET.get('amount')
-        prescription = request.GET.get('prescription')
 
         drugInfo = DrugsInfo.objects.all()
 
@@ -121,11 +120,6 @@ class StockStatusView(APIView):
             pass
         elif amount:
             drugInfo = drugInfo.filter(amount=amount)
-
-        if prescription == "undefined":
-            pass
-        elif amount:
-            drugInfo = drugInfo.filter(prescription=prescription)
 
         serializer = DrugsInfoSerializer(drugInfo, many=True)
         return Response(serializer.data)

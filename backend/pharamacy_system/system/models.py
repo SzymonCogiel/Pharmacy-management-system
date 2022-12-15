@@ -148,7 +148,6 @@ class DrugsInfo(models.Model):
     drugname = models.CharField(primary_key=True, max_length=200)
     price = models.FloatField(blank=True, null=True)
     amount = models.IntegerField(blank=True, null=True)
-    prescription = models.CharField(primary_key=False, max_length=200)
 
     class Meta:
         managed = False
