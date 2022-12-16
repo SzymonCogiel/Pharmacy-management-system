@@ -103,7 +103,7 @@ class StockStatusView(APIView):
     @staticmethod
     def get(request):
         drugname = request.GET.get('drugname')
-        price = request.GET.get('price')
+        price = float(request.GET.get('price'))
         amount = request.GET.get('amount')
         prescription = request.GET.get('prescription')
         warehouse = request.GET.get('warehouse')
@@ -247,6 +247,7 @@ class UpdatePasswordView(APIView):
         response = str(json.dumps({"res": "ok"}))
         return HttpResponse(response, content_type="text/plain")
 
+
 class UserInfoView(APIView):
 
     @action(detail=False, methods=['get'])
@@ -256,17 +257,13 @@ class UserInfoView(APIView):
         response = str(json.dumps({"res": str(user)}))
         return HttpResponse(response, content_type="text/plain")
 
+
 class UserView(APIView):
 
         @staticmethod
         def get(request):
-            name = request.GET.get('name')
-            surname = request.GET.get('surname')
-            pharmacy = request.GET.get('pharmacy')
             mail = request.GET.get('mail')
             userInfo = User.objects.filter(mail=mail).all()
-
-
 
             serializer = UserSerializer(userInfo, many=True)
             return Response(serializer.data)

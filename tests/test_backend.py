@@ -69,8 +69,10 @@ class TestAPI(unittest.TestCase):
             "drugname": True,
             "price": True,
             "amount": True,
+            "prescription": True,
+            "warehouse": True
         }
-        r = stock("Mirtazapine", 100, 68.0)
+        r = stock("Voltaren-XR", 328, 94.0)
         res = json.loads(r[1].decode("utf-8"))
         assert res[0].keys() == foo.keys()
 
