@@ -13,7 +13,7 @@ import Sprzedaz from './sprzedaz';
 import Panel from './panel_glowny';
 import Dostepne_leki from './dostepne_leki';
 import Bez_recepty from './bez_recepty';
-import Zamiennik from './zamiennik';
+import Zamiennik from './zamiennik2';
 import Recepta from './recepta';
 import Hurtownia from './hurtownia';
 import Edycja from './edycja';
