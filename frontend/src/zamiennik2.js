@@ -4,7 +4,7 @@ import {useState, useEffect} from 'react';
 import Form from "react-bootstrap/Form";
 import './panel.css';
 
-function Zamiennik() {
+function Zamiennik2() {
   const [data, setData] = useState([]);
   const [name, setName] = useState("");
 
@@ -73,4 +73,4 @@ function Zamiennik() {
 
 }
 
-export default Zamiennik;
+export default Zamiennik2;

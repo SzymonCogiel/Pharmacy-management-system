@@ -13,7 +13,8 @@ import Sprzedaz from './sprzedaz';
 import Panel from './panel_glowny';
 import Dostepne_leki from './dostepne_leki';
 import Bez_recepty from './bez_recepty';
-import Zamiennik from './zamiennik2';
+import Zamiennik2 from './zamiennik2';
+import Zamiennik from './zamiennik';
 import Recepta from './recepta';
 import Hurtownia from './hurtownia';
 import Edycja from './edycja';
@@ -33,6 +34,7 @@ export default function AppDef() {
           <Route index element={<Panel />} />
           <Route path="hurtownia" element={<Hurtownia />} />
           <Route path="dostepneleki" element={<Dostepne_leki />} />
+          <Route path="doleg" element={<Zamiennik2 />} />
           <Route path="zamie" element={<Zamiennik />} />
           <Route path="sprzedaz" element={<Sprzedaz />} />
           <Route path="recepta" element={<Recepta />} />
