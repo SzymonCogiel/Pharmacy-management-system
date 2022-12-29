@@ -24,6 +24,11 @@ const Layout = () => {
                         <br></br>
                         <hr></hr>
                         <li>
+                            <Link to="/doleg">Szukaj po dolegliwości</Link>
+                        </li>
+                        <br></br>
+                        <hr></hr>
+                        <li>
                             <Link to="/zamie" onClick={open}>      
                             <Modal >
                                 <div>
