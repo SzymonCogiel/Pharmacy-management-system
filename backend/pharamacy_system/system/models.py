@@ -151,6 +151,19 @@ class DrugsInfo(models.Model):
     amount = models.IntegerField(blank=True, null=True)
     prescription = models.CharField(primary_key=False, max_length=200)
     warehouse = models.CharField(primary_key=False, max_length=200)
+
     class Meta:
         managed = False
         db_table = 'drugs_info'
+
+
+class PresInfo(models.Model):
+    id = models.AutoField(primary_key=True)
+    pesel = models.CharField(primary_key=False, max_length=200)
+    prescription_id = models.CharField(primary_key=False, max_length=200)
+    drug_name = models.CharField(primary_key=False, max_length=200)
+    count = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'prescriptions'

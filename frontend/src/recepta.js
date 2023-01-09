@@ -13,7 +13,7 @@ function Recepta() {
   const navigate = useNavigate();
 
   const fetchData = () => {
-      const url = `http://127.0.0.1:8000/api/pharamcy/recepty?pesel=${pesel}&number=${number}`
+      const url = `http://127.0.0.1:8000/api/pharamcy/prescription?pesel=${pesel}&prescription_id=${number}`
     fetch(url)
       .then((response) => response.json())
       .then((actualData) => {
