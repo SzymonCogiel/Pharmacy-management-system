@@ -2,14 +2,14 @@ import io
 import json
 import pandas as pd
 import matplotlib.pyplot as plt
-from .models import User, Drugs, DrugsInfo
+from .models import User, Drugs, DrugsInfo, PresInfo
 from rest_framework.views import APIView
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from django.http import HttpResponse, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from atlassian import Confluence
-from .serializers import DrugsSerializer, DrugsInfoSerializer, UserSerializer
+from .serializers import DrugsSerializer, DrugsInfoSerializer, UserSerializer, PresInfoSerializer
 
 import sys
 from pharamacy_system import settings
@@ -136,6 +136,48 @@ class StockStatusView(APIView):
             drugInfo = drugInfo.filter(warehouse=warehouse)
 
         serializer = DrugsInfoSerializer(drugInfo, many=True)
+        return Response(serializer.data)
+
+class PrescriptionStatusView(APIView):
+
+    @staticmethod
+    def get(request):
+        id = request.GET.get('id')
+        pesel = request.GET.get('pesel')
+        prescription_id = request.GET.get('prescription_id')
+        drug_name = request.GET.get('drug_name')
+        count = request.GET.get('count')
+        PresInfo = PresInfo.objects.all()
+
+        #to presinfo po równa się coś wywala
+
+        if id == "undefined":
+            pass
+        elif id:
+            PresInfo = PresInfo.filter(id=id)
+
+        if pesel == "undefined":
+            pass
+        elif pesel:
+            PresInfo = PresInfo.filter(pesel=pesel)
+
+        if prescription_id == "undefined":
+            pass
+        elif prescription_id:
+            PresInfo = PresInfo.filter(prescription_id=prescription_id)
+
+        if drug_name == "undefined":
+            pass
+        elif drug_name:
+            PresInfo = PresInfo.filter(drug_name=drug_name)
+
+        if count == "undefined":
+            pass
+        elif count:
+            PresInfo = PresInfo.filter(count=count)
+
+
+        serializer = PresInfoSerializer(PresInfo, many=True)
         return Response(serializer.data)
 
 
