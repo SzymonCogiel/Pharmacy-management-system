@@ -147,37 +147,37 @@ class PrescriptionStatusView(APIView):
         prescription_id = request.GET.get('prescription_id')
         drug_name = request.GET.get('drug_name')
         count = request.GET.get('count')
-        PresInfo = PresInfo.objects.all()
+        presInfo = PresInfo.objects.all()
 
         #to presinfo po równa się coś wywala
 
         if id == "undefined":
             pass
         elif id:
-            PresInfo = PresInfo.filter(id=id)
+            presInfo = presInfo.filter(id=id)
 
         if pesel == "undefined":
             pass
         elif pesel:
-            PresInfo = PresInfo.filter(pesel=pesel)
+            presInfo = presInfo.filter(pesel=pesel)
 
         if prescription_id == "undefined":
             pass
         elif prescription_id:
-            PresInfo = PresInfo.filter(prescription_id=prescription_id)
+            presInfo = presInfo.filter(prescription_id=prescription_id)
 
         if drug_name == "undefined":
             pass
         elif drug_name:
-            PresInfo = PresInfo.filter(drug_name=drug_name)
+            presInfo = presInfo.filter(drug_name=drug_name)
 
         if count == "undefined":
             pass
         elif count:
-            PresInfo = PresInfo.filter(count=count)
+            presInfo = presInfo.filter(count=count)
 
 
-        serializer = PresInfoSerializer(PresInfo, many=True)
+        serializer = PresInfoSerializer(presInfo, many=True)
         return Response(serializer.data)
 
 
@@ -312,3 +312,35 @@ class UserView(APIView):
 
             serializer = UserSerializer(userInfo, many=True)
             return Response(serializer.data)
+
+
+class TestChangeStatusView(APIView):
+
+    @staticmethod
+    def get(request):
+        drugname = request.GET.get('drugname')
+        price = request.GET.get('price')
+        warehouse = request.GET.get('warehouse')
+        condition = request.GET.get('condition')
+
+
+        drugInfo = pd.DataFrame( list( DrugsInfo.objects.all().values()))
+        drug = [ x['condition'] for x in list( Drugs.objects.all().values('condition'))[:2637]]
+        drugInfo['condition'] = drug
+
+
+        if condition == "undefined":
+            pass
+        elif condition:
+            drugInfo = drugInfo[drugInfo['condition'] == condition]
+
+
+        response = drugInfo
+        response = json.loads(response.to_json(orient='index'))
+        response = [response[i] for i in response.keys()]
+        print(type(response))
+
+
+        return HttpResponse(json.dumps(response), content_type='application/json')
+
+
