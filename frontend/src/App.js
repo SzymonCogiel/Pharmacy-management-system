@@ -1,7 +1,7 @@
 import avatar from './img/avatar.png';
 import './App.css';
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import { useNavigate } from "react-router-dom";
@@ -18,6 +18,9 @@ function App() {
 		axios.get(url)
 		.then(({data}) => {setLogRes(data.res)});
 	}
+	useEffect(() => {
+		console.log(logRes);
+	}, [logRes]);
 
 	const validateForm = () => {
 			if(logRes === 'ok'){

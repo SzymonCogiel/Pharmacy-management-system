@@ -1,7 +1,9 @@
+import os
 import io
 import json
 import pandas as pd
 import matplotlib.pyplot as plt
+from sqlalchemy import create_engine
 from .models import User, Drugs, DrugsInfo, PresInfo
 from rest_framework.views import APIView
 from rest_framework.decorators import action
@@ -10,11 +12,16 @@ from django.http import HttpResponse, JsonResponse
 from django.core.exceptions import ObjectDoesNotExist
 from atlassian import Confluence
 from .serializers import DrugsSerializer, DrugsInfoSerializer, UserSerializer, PresInfoSerializer
+from PIL import Image
 
 import sys
 from pharamacy_system import settings
 sys.path.insert(0, '../')
 
+
+
+pg_pass = os.environ.get('POSTGRES_PASS','')
+engine = create_engine( 'postgresql+psycopg2://postgres:{0}@localhost:5432/pharmacy'.format(pg_pass))
 
 class TestAPIView(APIView):
 
@@ -95,7 +102,53 @@ class MapView(APIView):
 
 
 class SalesAnalysisView(APIView):
-    pass
+    @staticmethod
+    def get(request):
+        cena = pd.read_sql_query('SELECT price FROM drugs_info', con=engine)
+        plt.figure(1, figsize=(8, 8))
+        plt.hist(cena)
+        plt.xlabel('Cena [zł])', size=40)
+        plt.ylabel('Ilość', size=40)
+        plt.grid(True)
+        plt.title('Najpopularniejsze ceny', size=40)
+        plt.savefig('./cena.png')
+
+        rodzaje = pd.read_sql_query('SELECT condition, COUNT(*) FROM drugs GROUP BY condition ORDER BY count DESC LIMIT 5;',
+                                    con=engine)
+        plt.figure(2, figsize=(8, 8))
+        plt.scatter(rodzaje['condition'], rodzaje['count'])
+        plt.xlabel('Przeznaczenie leku', size=40)
+        plt.ylabel('Ilość', size=40)
+        plt.title('Najpopularniejsze rodzaje leków', fontsize=30)
+        plt.savefig('./rodzaje.png')
+
+        plt.figure(3, figsize=(8, 8))
+        mies = pd.read_sql_query(
+            'SELECT sum(january)as Styczeń,sum(february) as Luty, sum(march) as Marzec,sum(april) as kwiecień,sum(may)as Maj,sum(june) as Czerwiec,sum(july)as Lipiec,sum(august) as Sierpień,sum(september) as Wrzesień,sum(october) as Październik,sum(november) as Listopad,sum(december) as Grudzień FROM drugs_monthly_report;',
+            con=engine)
+        mies = mies.T
+        plt.xlabel('Miesiące', size=40)
+        plt.ylabel('Mln zł', size=40)
+        plt.title('Sprzedaż w ciągu roku', fontsize=30)
+        plt.plot(mies)
+        plt.savefig('./kolowy.png')
+        plt.xticks(rotation=45)
+        list_pdf = ['./kolowy.png', './rodzaje.png', './cena.png']
+
+        images = [
+            Image.open(f).convert('RGB')
+            for f in list_pdf
+        ]
+
+        pdf_path = 'pharmacy_summary.pdf'
+        images[0].save(
+            pdf_path, "PDF", resolution=100.0, save_all=True, append_images=images[1:]
+        )
+        pdfFileObj = open(pdf_path, 'rb')
+
+        response = HttpResponse(pdfFileObj, content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="' + pdf_path + '"'
+        return response
 
 
 class StockStatusView(APIView):
@@ -208,8 +261,6 @@ class PDFManualView(APIView):
             title = p['title']
             id = p['id']
             pdf_name = title + '.pdf'
-            # with open(pdf_name, "wb") as pdf_file:
-            #     pdf_file.write(confluence.get_page_as_pdf(id))
             pdf = confluence.get_page_as_pdf(id)
 
         response = HttpResponse(pdf, content_type='application/pdf')
