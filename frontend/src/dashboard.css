@@ -1,0 +1,101 @@
+
+
+
+body{
+
+    font-family: 'Lucida Console';
+    color: white;
+}
+
+
+header{
+    margin-top: 30px;
+    background-color:rgb(14, 13, 13);
+    text-align:center;
+}
+
+h1{
+    top:25px;
+    font-family: 'Lucida Sans Unicode';
+    color:#FFD700;
+}
+h2{
+    top:25px;
+    font-family: 'Lucida Sans Unicode';
+    color: #FFD700;
+}
+
+ul{
+    top: 70px;
+    width: 150px;
+    height: 500px;
+    padding: 15px;
+    background-color:rgb(0, 0, 0);
+    color:#FFD700;
+    border-style:ridge solid;
+}
+
+
+ul a{
+    text-decoration: none;
+    font-size: 15px;
+    color:#FFD700;
+}
+
+ul a:hover{
+    text-decoration: underline;
+}
+
+article a{
+    position: relative;
+    margin: 40px;
+    float: left;
+    top: 50px;
+    text-decoration: none;
+    font-size: 30px;
+    padding: 20px;
+    color: #FFD700;
+    border: 4px solid lavender;
+}
+
+article{
+    position: absolute;
+    left: 300px;
+}
+
+p{
+    font-family: 'Lucida Sans Unicode';
+    font-size: 25px;
+    color: #FFD700;
+}
+
+
+
+
+
+  
+  /*-----------------------MOJE______________________________________*/
+
+  /*
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 30px;
+  }
+*/
+
+
+  .wykresy{
+    position:relative;
+    top:20px;
+    left:250px;
+        flex: 45%;
+        max-width: 45%;
+        padding: 0 20px;
+      }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 30px;
+  }
