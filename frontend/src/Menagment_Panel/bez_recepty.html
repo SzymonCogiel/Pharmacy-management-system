@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="panel.css">
+        <title>TwojaApteka</title>
+        <meta charset="utf-8">
+    </head>
+
+    <body>
+
+        <header>
+            <h1>TwojaApteka: Panel Pracownika</h1>
+        </header>
+
+
+        <nav>
+            <ul>
+                <a href="panel_glowny.html">Strona główna</a> 
+                <br>
+                <hr>
+                <a href="dostepne_leki.html">Dostępne leki</a> 
+                <br>
+                <hr>
+                <a href="zamiennik.html">Znajdź lek lub zamiennik</a>
+                <br> 
+                <hr>                   
+                <a href="sprzedaz.html">Dokonaj sprzedaży</a>
+                <br>
+                <hr>
+                <a href="#">Zamów z hurtowni</a>
+                <br>
+                <hr>
+                <a href="#">Generuj raport</a>
+                <br>
+                <hr>
+                <a href="#">Zarządzaj kontem</a>
+                <br>
+                <hr>
+                <a href="#">Wyloguj</a>
+            </ul>
+        </nav>
+
+        <article>
+            <form action="#">
+                <label for="fname">Nazwa:</label>
+                <input type="text" id="fname" name="fname"><br><br>
+                <label for="lname">Ilość sztuk:</label>
+                <input type="text" id="lname" name="lname"><br><br>
+                <input type="submit" value="Dodaj produkt">
+            </form>
+
+            <br>
+            <br>
+            <h2>Twój koszyk</h2>
+            <table>
+                <tr><th>Nazwa</th><th>Liczba sztuk</th><th>Cena</th></tr>
+                <tr><td>String</td><td>Int</td><td>Double</td></tr>
+            </table>
+            <h3>Razem do zapłaty: </h3>
+
+            <form action="#">
+                <input type="submit" value="Potwierdź przyjęcie płatności">
+            </form>
+
+        </article>
+
+    </body>
+</html>
