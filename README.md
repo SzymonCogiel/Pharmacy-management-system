@@ -40,13 +40,17 @@ For example from the ".sql" file, upload a backup of your database.
 a)	WINDOWS
 Edit the system environment variables -> press button “Environment Variables” -> press button “New”
 
+
 Set:
+
 
 POSTGRES_PASS – hasło do POSTGRESA
 CONFLUENCE_AGH_TOKEN – token autoryzacyjny do confluence
 ATLASSIAN_AGH_MAIL – mail przypisany do confluence
 
+
 b)	LINUX
+
 
 $ export POSTGRES_PASS=YOUR_PASSWORD
 $ export CONFLUENCE_AGH_TOKEN=YOUR_TOKEN
