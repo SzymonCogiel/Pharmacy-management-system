@@ -1,5 +1,4 @@
 # Pharmacy-management-system
-Team project
 
 Have you ever found yourself struggling in search for a drugs remembering only a single catchy(key) phrase 
 or tried calculating complex measures to assess performance? Do you manage or work in a pharmacy?
