@@ -34,6 +34,7 @@ $ venv\Scripts\activate
 Create a Postgres database named "pharmacy".
 From the ".sql" file or by other method, upload a backup of your database.
 
+
 ### 4. Set the following variables in environment variables:
 
 
