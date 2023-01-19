@@ -8,7 +8,6 @@ import NoPage from './NoPage';
 import Layout from './Layout';
 
 import App from './App';
-import Register from './Authorization/Rejestracja/Register';
 import Sprzedaz from './sprzedaz';
 import Panel from './panel_glowny';
 import Dostepne_leki from './dostepne_leki';
