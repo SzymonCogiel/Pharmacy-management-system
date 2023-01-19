@@ -51,11 +51,17 @@ ATLASSIAN_AGH_MAIL – mail przypisany do confluence
 <br />
 b)	LINUX
 
-<br />
+```
 $ export POSTGRES_PASS=YOUR_PASSWORD
-$ export CONFLUENCE_AGH_TOKEN=YOUR_TOKEN
-$ export ATLASSIAN_AGH_MAIL=YOUR_MAIL
+```
 
+```
+$ export CONFLUENCE_AGH_TOKEN=YOUR_TOKEN
+```
+
+```
+$ export ATLASSIAN_AGH_MAIL=YOUR_MAIL
+```
 ### 5. Start the Django server:
 
 ```
