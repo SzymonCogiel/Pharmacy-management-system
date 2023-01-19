@@ -99,5 +99,5 @@ $ py frontend_test.py
 $ py backend_test.py
 ```
 
-### 8. Enjoy the working app
+### 8. If all the above steps have been successful, enjoy the working app
 ;)
