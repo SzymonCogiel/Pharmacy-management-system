@@ -43,7 +43,7 @@ Edit the system environment variables -> press button “Environment Variables�
 
 Set:
 
-<br />
+
 POSTGRES_PASS – hasło do POSTGRESA
 <br />
 CONFLUENCE_AGH_TOKEN – token autoryzacyjny do confluence
