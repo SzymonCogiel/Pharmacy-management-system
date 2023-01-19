@@ -49,6 +49,8 @@ CONFLUENCE_AGH_TOKEN – token autoryzacyjny do confluence
 ATLASSIAN_AGH_MAIL – mail przypisany do confluence
 
 <br />
+
+<br />
 b)	LINUX
 
 ```
