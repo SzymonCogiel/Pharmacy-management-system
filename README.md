@@ -44,11 +44,11 @@ a)	WINDOWS
 Edit the system environment variables -> press button “Environment Variables” -> press button “New”
 
 
-POSTGRES_PASS – hasło do POSTGRESA
+POSTGRES_PASS – POSTGRES password
 <br />
-CONFLUENCE_AGH_TOKEN – token autoryzacyjny do confluence
+CONFLUENCE_AGH_TOKEN – authorization token for confluence
 <br />
-ATLASSIAN_AGH_MAIL – mail przypisany do confluence
+ATLASSIAN_AGH_MAIL – email assigned to confluence
 
 <br />
 
