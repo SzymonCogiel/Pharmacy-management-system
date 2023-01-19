@@ -38,6 +38,8 @@ For example from the ".sql" file, upload a backup of your database.
 
 
 a)	WINDOWS
+
+
 Edit the system environment variables -> press button “Environment Variables” -> press button “New”
 
 
