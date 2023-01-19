@@ -156,7 +156,7 @@ class StockStatusView(APIView):
     @staticmethod
     def get(request):
         drugname = request.GET.get('drugname')
-        price = float(request.GET.get('price'))
+        price = request.GET.get('price')
         amount = request.GET.get('amount')
         prescription = request.GET.get('prescription')
         warehouse = request.GET.get('warehouse')
@@ -313,6 +313,7 @@ class DataDrugsView(APIView):
         elif useful:
             drug = drug.filter(useful=useful)
 
+        drug = drug.order_by('-rating')[:50][::-1]
         serializer = DrugsSerializer(drug, many=True)
         return Response(serializer.data)
 
