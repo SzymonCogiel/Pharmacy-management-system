@@ -20,12 +20,17 @@ $ git clone https://github.com/SzymonCogiel/Pharmacy-management-system.git
 ```
 $ cd backend
 ```
+
 ```
 $ py -m venv venv
 ```
 
 ```
 $ venv\Scripts\activate
+```
+
+```
+$ pip install -r requirements.txt
 ```
 
 ### 3. Create databese and upload data:
